@@ -9,101 +9,172 @@
 
     body {
       margin: 0;
+      height: 100vh;
       font-family: 'Montserrat', sans-serif;
       color: #eee;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       background: linear-gradient(-45deg, #3a0ca3, #4361ee, #720026, #560bad);
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      position: relative;
       overflow-x: hidden;
+      user-select: none;
     }
 
     @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
+      0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .top-header {
-      margin-top: 20px;
+      position: fixed;
+      top: 15px;
+      right: 25px;
       font-weight: 900;
-      font-size: 2rem;
+      font-size: 2.8rem;
       color: #b0aaff;
-      text-shadow: 0 0 12px #9a89ff;
-      animation: fadeInUp 1s forwards;
+      text-shadow: 0 0 18px #9a89ff;
+      user-select: none;
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeInUp 1.2s forwards;
     }
 
     .container {
-      background: rgba(30,30,30,0.92);
-      border-radius: 16px;
-      box-shadow: 0 0 25px #7b5cff;
-      padding: 30px 24px;
-      margin: 40px 16px 20px;
+      background: rgba(30, 30, 30, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 0 35px #7b5cff, 0 0 65px #5c3aff;
+      padding: 40px 50px;
       max-width: 420px;
-      width: 100%;
       text-align: center;
-      animation: fadeInUp 1s 0.3s forwards;
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s 0.5s forwards;
+    }
+
+    .container:hover {
+      box-shadow: 0 0 65px #7b5cff, 0 0 95px #5c3aff;
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-weight: 700;
+      font-size: 2.4rem;
+      margin-bottom: 30px;
       color: #8c7bff;
-      margin-bottom: 20px;
+      text-shadow: 0 0 16px #8c7bff;
     }
 
     .info {
-      font-size: 1rem;
-      margin-bottom: 12px;
+      font-size: 1.2rem;
+      margin-bottom: 18px;
+      line-height: 1.5;
+      opacity: 0;
+      animation: fadeIn 0.8s forwards;
     }
+
+    .info:nth-child(2) { animation-delay: 1.2s; }
+    .info:nth-child(3) { animation-delay: 1.4s; }
+    .info:nth-child(4) { animation-delay: 1.6s; }
 
     .info span {
-      font-weight: bold;
+      font-weight: 700;
       color: #9a89ff;
+      text-shadow: 0 0 8px #9a89ff;
     }
 
-    .btn, .details-btn {
+    .btn {
       display: inline-block;
-      padding: 14px 32px;
-      font-size: 1.1rem;
-      font-weight: bold;
+      padding: 16px 52px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #eee;
       border-radius: 40px;
-      text-decoration: none;
-      color: #fff;
-      background: linear-gradient(270deg, #001f5b, #0047ab, #00296b);
-      background-size: 1000% 1000%;
-      animation: btnGradient 6s ease infinite;
-      margin-top: 18px;
       border: none;
-      box-shadow: 0 0 22px #0047ab;
       cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 22px #0047ab;
+      background: linear-gradient(270deg, #001f5b, #0047ab, #00296b, #003366, #001f5b);
+      background-size: 1000% 1000%;
+      animation: btnGradient 8s ease infinite;
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s 2.1s forwards;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: -120%;
+      left: -120%;
+      width: 340%;
+      height: 340%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0, 119, 255, 0.4), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(0, 51, 102, 0.5), transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(0, 102, 204, 0.3), transparent 60%);
+      background-repeat: no-repeat;
+      animation: waterDrops 6s linear infinite;
+      pointer-events: none;
+      border-radius: 40px;
+      mix-blend-mode: screen;
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 45px #0077ff, 0 0 65px #003366;
     }
 
     @keyframes btnGradient {
-      0% { background-position: 0% 50%; }
+      0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes waterDrops {
+      0%, 100% { background-position: 20% 30%, 70% 60%, 40% 80%; }
+      50% { background-position: 25% 35%, 75% 65%, 45% 85%; }
     }
 
     .details-btn {
-      background: #6a0dad;
-      box-shadow: 0 0 16px #9a4bff;
+      margin-top: 40px;
+      background: linear-gradient(270deg, #4b0082, #6a0dad, #4b0082);
+      padding: 14px 46px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 18px #9a4bff;
+      border: none;
+      outline: none;
+      user-select: none;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s 2.4s forwards;
+    }
+
+    .details-btn:hover {
+      box-shadow: 0 0 45px #cc9aff;
     }
 
     .details-block {
+      max-width: 420px;
       background: rgba(25, 25, 40, 0.95);
       color: #ccc;
-      font-size: 1rem;
-      border-radius: 12px;
-      padding: 20px;
+      font-size: 1.1rem;
+      border-radius: 16px;
+      padding: 28px 40px;
       margin-top: 15px;
-      box-shadow: 0 0 20px #4b0082;
+      box-shadow: 0 0 30px #4b0082;
+      user-select: text;
       overflow: hidden;
       max-height: 0;
       opacity: 0;
-      transition: max-height 0.5s ease, opacity 0.5s ease;
+      transition: max-height 0.6s ease, opacity 0.6s ease;
     }
 
     .details-block.show {
@@ -112,58 +183,105 @@
     }
 
     .details-block div {
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .details-block div span {
+      font-weight: 700;
+      color: #9a89ff;
+      text-shadow: 0 0 6px #9a89ff;
     }
 
     .hide-btn {
+      margin-top: 12px;
       background: #551a8b;
       color: #eee;
-      padding: 8px 20px;
       border: none;
-      border-radius: 20px;
-      font-weight: bold;
-      margin-top: 10px;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
       cursor: pointer;
+      box-shadow: 0 0 15px #7a37e3;
+      transition: background-color 0.3s ease;
     }
 
-    .particle {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      background: radial-gradient(circle, gold 60%, transparent 100%);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: particleMove 700ms forwards;
-      filter: drop-shadow(0 0 3px gold);
-      z-index: 9999;
-    }
-
-    @keyframes particleMove {
-      to {
-        transform: translate(var(--tx), var(--ty)) scale(0);
-        opacity: 0;
-      }
-    }
-
-    .footer {
-      font-size: 0.8rem;
-      color: #aaa;
-      text-align: center;
-      margin: 20px;
-      padding: 10px;
-      text-shadow: 0 0 4px #5c4dff44;
+    .hide-btn:hover {
+      background: #7522dd;
     }
 
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* Адаптация под мобильные */
-    @media (max-width: 480px) {
-      h1 { font-size: 1.5rem; }
-      .btn, .details-btn { font-size: 1rem; padding: 12px 24px; }
-      .top-header { font-size: 1.6rem; }
+    @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+
+    .footer {
+      max-width: 420px;
+      margin: 40px auto 20px auto;
+      padding: 12px 20px;
+      color: #aaa;
+      font-size: 0.9rem;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      user-select: none;
+      opacity: 0;
+      animation: fadeInUp 1s 2.8s forwards;
+      text-shadow: 0 0 6px #5c4dff44;
+    }
+
+    /* 📱 Мобильная адаптация: масштаб в 2 раза меньше */
+    @media (max-width: 600px) {
+      .top-header {
+        font-size: 1.5rem;
+        top: 10px;
+        right: 10px;
+      }
+
+      .container {
+        padding: 20px 25px;
+        max-width: 90%;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+      }
+
+      .info {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+
+      .btn, .details-btn {
+        font-size: 1rem;
+        padding: 10px 26px;
+      }
+
+      .details-block {
+        font-size: 0.9rem;
+        padding: 20px;
+      }
+
+      .hide-btn {
+        font-size: 0.85rem;
+        padding: 8px 20px;
+      }
+
+      .footer {
+        font-size: 0.75rem;
+        padding: 10px;
+      }
     }
   </style>
 </head>
@@ -173,24 +291,25 @@
   <div class="container">
     <h1>Оплата по карте</h1>
     <div class="info"><span>Сумма:</span> 100р</div>
-    <div class="info"><span>Система:</span> ЮMoney</div>
-    <a href="https://yoomoney.ru/bill/pay/1AGJH7IGOBR.250527" class="btn" id="payBtn">Оплатить</a>
+    <div class="info"><span>Система платежей:</span> ЮMoney</div>
+    <a href="https://yoomoney.ru/bill/pay/1AGJH7IGOBR.250527" class="btn" id="payBtn">оплатить</a>
     <button class="details-btn" id="detailsBtn">Детали платежа</button>
 
     <div class="details-block" id="detailsBlock">
       <div><span>Получатель:</span> Kirill_Fernade | Fernie</div>
-      <div><span>Сумма:</span> 100 рублей</div>
-      <div><span>Товар:</span> Статус "Специальный Администратор (11)"</div>
+      <div><span>Сумма платежа:</span> 100 рублей</div>
+      <div><span>Суть:</span> Покупка товара</div>
+      <div><span>Товар:</span> Статус "Специальный Администратор (11)" в Telegram боте FernieUI</div>
       <div><span>Срок:</span> 15 дн.</div>
-      <div><span>Оплата:</span> Банковская карта через ЮMoney</div>
+      <div><span>Метод:</span> Банковская Карта</div>
       <button class="hide-btn" id="hideBtn">Скрыть</button>
     </div>
   </div>
 
-  <div class="footer">
+  <footer class="footer">
     © 2025 FernieUI. Все права защищены.<br>
-    Конфиденциальность соблюдается.
-  </div>
+    Мы заботимся о вашей конфиденциальности.
+  </footer>
 
   <script>
     const detailsBtn = document.getElementById('detailsBtn');
@@ -211,19 +330,23 @@
     payBtn.addEventListener('click', (e) => {
       e.preventDefault();
       for (let i = 0; i < 6; i++) createParticle(e.clientX, e.clientY);
-      setTimeout(() => window.location.href = payBtn.href, 500);
+      setTimeout(() => {
+        window.location.href = payBtn.href;
+      }, 500);
     });
 
     function createParticle(x, y) {
       const p = document.createElement('div');
-      p.className = 'particle';
+      p.classList.add('particle');
       document.body.appendChild(p);
       p.style.left = x + 'px';
       p.style.top = y + 'px';
       const angle = Math.random() * 2 * Math.PI;
-      const dist = 60 + Math.random() * 60;
-      p.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
-      p.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+      const dist = Math.random() * 120 + 40;
+      const tx = Math.cos(angle) * dist + 'px';
+      const ty = Math.sin(angle) * dist + 'px';
+      p.style.setProperty('--tx', tx);
+      p.style.setProperty('--ty', ty);
       setTimeout(() => p.remove(), 700);
     }
   </script>
